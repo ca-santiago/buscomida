@@ -1,0 +1,8 @@
+node_modules/
+build/
+dist/
+
+*.jar
+*.tar
+*.*.jar
+*.*.tar
