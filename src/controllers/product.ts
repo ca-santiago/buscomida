@@ -1,7 +1,6 @@
 import express from "express";
 import productUseCases from "../domain/use-cases/product";
 import Joi from "joi";
-import { CreateNewProductProps } from "../domain/use-cases/product/create-product";
 
 export const productRouter = express();
 
@@ -27,7 +26,7 @@ productRouter.post("/", async (req, res) => {
       description,
       price,
     });
-    res.status(200).json({product});
+    res.status(200).json({ product });
     return;
   } catch (err) {
     return res.status(500);
@@ -40,11 +39,32 @@ productRouter.get("/:id", async (req, res) => {
     const product = await productUseCases.getProductById(id);
 
     if (product) {
-      return res.status(200).json({product});
+      return res.status(200).json({ product });
     } else {
       return res.status(404);
     }
   } catch (err) {
     return res.status(500);
   }
+});
+
+const productListQuery = Joi.object().keys({
+  page: Joi.number(),
+  count: Joi.number(),
+});
+
+productRouter.get("/", async (req, res) => {
+  let count;
+  let page;
+  if (req.query.page || req.query.count) {
+    const { error, value } = productListQuery.validate(req.query);
+    if (error) {
+      return res.status(404).json(error.message);
+    }
+    page = value.page;
+    count = value.count;
+  }
+
+  const products = await productUseCases.getProductList(page, count);
+  res.status(200).json(products);
 });
