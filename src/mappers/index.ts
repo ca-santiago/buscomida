@@ -1,2 +1,2 @@
 export * from './product';
-export * from './complement';
+export * from './extra';

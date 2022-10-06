@@ -97,6 +97,8 @@ export interface Extra {
   description: string;
   status: ItemStatus;
   addedPriceByUnit: Price;
+  createdAt: string;
+  publishedAt: string;
 }
 
 // Future interface to allow Extras to have their own extras

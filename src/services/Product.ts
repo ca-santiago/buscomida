@@ -1,4 +1,4 @@
-import { ProductDAO } from "../mappers/product/product.types";
+import { ProductDAO } from "../mappers/types";
 
 const products: ProductDAO[] = [];
 

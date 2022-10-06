@@ -1,5 +1,5 @@
 import productMapper from "../../../mappers/product";
-import { ProductPublicDTO } from "../../../mappers/product/product.types";
+import { ProductPublicDTO } from "../../../mappers/types";
 import productService from "../../../services/product";
 
 interface GetProductListResult {
