@@ -60,7 +60,7 @@ export interface ExtraEntry {
    */
   extraId: string;
 
-  minxSelection: number;
+  minSelection: number;
   maxSelection: number;
 
   addedPrice: Price;

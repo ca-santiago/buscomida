@@ -1,6 +1,7 @@
 import express from "express";
 import http from "http";
 import morgan from "morgan";
+import { extraEntriesRouter } from "./controllers/entra-entry";
 import { extraRouter } from "./controllers/extra";
 import { productRouter } from "./controllers/product";
 
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 // ROUTERS
 app.use("/products", productRouter);
 app.use("/extras", extraRouter);
+app.use("/extra-entries", extraEntriesRouter);
 
 server.listen(5001, () => {
   console.log("Server running on port 5001");
