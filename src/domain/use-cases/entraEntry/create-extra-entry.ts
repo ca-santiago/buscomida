@@ -4,8 +4,6 @@ import extraEntryService from "../../../services/extra-entry";
 import extraEntryModel, {
   CreateDraftExtraEntryProps,
 } from "../../models/entra-entry";
-
-import { v4, validate } from "uuid";
 import extraService from "../../../services/extra";
 
 export interface CreateNewExtraEntryProps extends CreateDraftExtraEntryProps {}

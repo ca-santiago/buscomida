@@ -1,4 +1,3 @@
-import { boolean } from "joi";
 import { ExtraEntryDAO } from "../mappers/types";
 
 const extraEntries: ExtraEntryDAO[] = [];
@@ -44,11 +43,11 @@ const exist: ExtraEntryExist = (eId: string) => {
   return existing !== undefined;
 };
 
-const extraEntrieService = {
+const extraEntriesService = {
   save,
   getExtraEntriesCount,
   getExtraEntryById,
   exist,
 };
 
-export default extraEntrieService;
+export default extraEntriesService;

@@ -27,6 +27,7 @@ const createDraftEmptyExtraEntry = ({
     minSelection,
     title,
     titlePrefix,
+    createdAt: Date.now().toString(),
   };
 };
 

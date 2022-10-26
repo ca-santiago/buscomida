@@ -57,6 +57,7 @@ export interface ExtraEntryDAO {
   minSelection: number;
   maxSelection: number;
   addedPrice: number;
+  createdAt: string;
 }
 
 export interface ExtraEntryOnSectionDAO {
@@ -99,9 +100,10 @@ export interface ExtraEntryDTO {
   minSelection: number;
   maxSelection: number;
   addedPrice: number;
+  createdAt: string;
 }
 
-export interface ExtraEntryOnSectionDAO {
+export interface ExtraEntryOnSectionDTO {
   extraId: string;
   addedPriceByUnit: number;
   minSelection: number;
@@ -109,7 +111,7 @@ export interface ExtraEntryOnSectionDAO {
   status: string;
 }
 
-export interface ExtraEntrySectionDAO {
+export interface ExtraEntrySectionDTO {
   id: string;
   title: string;
   titlePrefix: string;

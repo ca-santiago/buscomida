@@ -16,7 +16,7 @@ export interface ExtraEntryOnSection {
   extraId: string;
   addedPriceByUnit: Price;
 
-  minxSelection: number;
+  minSelection: number;
   maxSelection: number;
   status: ItemStatus;
 }
@@ -54,16 +54,14 @@ export interface ExtraEntry {
   // eg. {titlePrefix} {title} - {Agregue un} {aderezo}
   titlePrefix: string;
   status: ItemStatus;
-
   /**
    * Id from {@link Extra}
    */
   extraId: string;
-
   minSelection: number;
   maxSelection: number;
-
   addedPrice: Price;
+  createdAt: string;
 }
 
 export interface Product {
@@ -111,7 +109,7 @@ export interface ExtraItem {
   id: string;
   displayName: string;
   description: string;
-  minxSelection: number;
+  minSelection: number;
   maxSelection: number;
   status: ItemStatus;
 }

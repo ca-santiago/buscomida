@@ -2,6 +2,8 @@ import express from "express";
 import Joi from "joi";
 import extraUseCases from "../domain/use-cases/extra";
 
+import { listJoiQuery } from "./helpers/list-validator";
+
 export const extraRouter = express();
 
 const extraPortRequest = Joi.object().keys({
@@ -33,16 +35,11 @@ extraRouter.post("/", async (req, res) => {
   }
 });
 
-const extraListQuery = Joi.object().keys({
-  page: Joi.number(),
-  count: Joi.number(),
-});
-
 extraRouter.get("/", async (req, res) => {
   let count;
   let page;
   if (req.query.page || req.query.count) {
-    const { error, value } = extraListQuery.validate(req.query);
+    const { error, value } = listJoiQuery.validate(req.query);
     if (error) {
       return res.status(400).json(error.message);
     }
