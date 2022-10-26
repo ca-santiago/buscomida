@@ -1,6 +1,7 @@
 import express from "express";
 import Joi from "joi";
 import extraEntryUseCases from "../domain/use-cases/entraEntry";
+import { listJoiQuery } from "./helpers/list-validator";
 
 export const extraEntriesRouter = express();
 
@@ -45,38 +46,33 @@ extraEntriesRouter.post("/", async (req, res) => {
   }
 });
 
-// const extraEntryListQuery = Joi.object().keys({
-//   page: Joi.number(),
-//   count: Joi.number(),
-// });
+extraEntriesRouter.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const data = await extraEntryUseCases.getById(id);
 
-// extraEntryRouter.get("/", async (req, res) => {
-//   let count;
-//   let page;
-//   if (req.query.page || req.query.count) {
-//     const { error, value } = extraEntryListQuery.validate(req.query);
-//     if (error) {
-//       return res.status(400).json(error.message);
-//     }
-//     page = value.page;
-//     count = value.count;
-//   }
+    if (data) {
+      res.status(200).json({ data });
+    } else {
+      res.status(404).end();
+    }
+  } catch (err) {
+    return res.status(500);
+  }
+});
 
-//   const extraEntrys = await extraEntryUseCases.getExtraEntryList(page, count);
-//   res.status(200).json(extraEntrys);
-// });
+extraEntriesRouter.get("/", async (req, res) => {
+  let count;
+  let page;
+  if (req.query.page || req.query.count) {
+    const { error, value } = listJoiQuery.validate(req.query);
+    if (error) {
+      return res.status(400).json(error.message);
+    }
+    page = value.page;
+    count = value.count;
+  }
 
-// extraEntryRouter.get("/:id", async (req, res) => {
-//   const { id } = req.params;
-//   try {
-//     const extraEntry = await extraEntryUseCases.getExtraEntryById(id);
-
-//     if (extraEntry) {
-//       res.status(200).json({ extraEntry });
-//     } else {
-//       res.status(404).end();
-//     }
-//   } catch (err) {
-//     return res.status(500);
-//   }
-// });
+  const extraEntrys = await extraEntryUseCases.getList(page, count);
+  res.status(200).json(extraEntrys);
+});

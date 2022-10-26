@@ -14,7 +14,7 @@ const save: SaveExtraEntry = (e) => {
 };
 
 export type GetExtraEntryById = (eId: string) => Promise<ExtraEntryDAO | null>;
-const getExtraEntryById: GetExtraEntryById = (eId) => {
+const getById: GetExtraEntryById = (eId) => {
   return new Promise((res) => {
     const exist = extraEntries.find(({ id }) => eId === id);
     return res(exist || null);
@@ -28,7 +28,7 @@ export type GetExtraEntriesCount = (
   pageCount: number;
   data: ExtraEntryDAO[];
 }>;
-const getExtraEntriesCount: GetExtraEntriesCount = (offset, count) => {
+const getCount: GetExtraEntriesCount = (offset, count) => {
   const data = extraEntries.slice(offset, offset + count);
   const pageCount = Math.ceil(extraEntries.length / count);
   return Promise.resolve({
@@ -43,11 +43,11 @@ const exist: ExtraEntryExist = (eId: string) => {
   return existing !== undefined;
 };
 
-const extraEntriesService = {
+const extraEntryService = {
   save,
-  getExtraEntriesCount,
-  getExtraEntryById,
+  getCount,
+  getById,
   exist,
 };
 
-export default extraEntriesService;
+export default extraEntryService;

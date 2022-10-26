@@ -1,12 +1,11 @@
 import createNewExtraEntry from "./create-extra-entry";
-// import getExtraEntryById from "./get-by-id";
-// import getExtraEntryList from "./get-extra-entry-list";
-// TODO: casantiago - Complete use cases
+import getExtraEntryById from "./get-by-id";
+import getExtraEntryList from "./get-list";
 
 const extraEntryUseCases = {
   createNewExtraEntry,
-//   getExtraEntryById,
-//   getExtraEntryList,
+  getById: getExtraEntryById,
+  getList: getExtraEntryList,
 };
 
 export default extraEntryUseCases;

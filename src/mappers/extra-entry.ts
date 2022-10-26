@@ -1,30 +1,30 @@
 import { ItemStatus, ExtraEntry } from "../domain/models/types";
 import { ExtraEntryDAO, ExtraEntryDTO } from "./types";
 
-const domainToDAO = (p: ExtraEntry): ExtraEntryDAO => {
-  return {...p};
+const domainToDAO = (eE: ExtraEntry): ExtraEntryDAO => {
+  return {...eE};
 };
 
-const DAOtoDomain = (p: ExtraEntryDAO): ExtraEntry => {
-  return { ...p, status: p.status as ItemStatus };
+const DAOtoDomain = (eE: ExtraEntryDAO): ExtraEntry => {
+  return { ...eE, status: eE.status as ItemStatus };
 };
 
-const domainToDTO = (p: ExtraEntry): ExtraEntryDTO => {
+const domainToDTO = (eE: ExtraEntry): ExtraEntryDTO => {
   return {
-    ...p,
-    status: p.status.toString(),
+    ...eE,
+    status: eE.status.toString(),
   };
 };
 
-const DAOToDTO = (p: ExtraEntryDAO): ExtraEntryDTO => {
-  return DAOtoDomain(p);
+const DAOToDTO = (eE: ExtraEntryDAO): ExtraEntryDTO => {
+  return DAOtoDomain(eE);
 };
 
-const extraMapper = {
+const extraEntryMapper = {
   domainToDAO,
   DAOtoDomain,
   domainToDTO,
   DAOToDTO,
 };
 
-export default extraMapper;
+export default extraEntryMapper;
