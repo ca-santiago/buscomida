@@ -1,5 +1,5 @@
 export interface ProductDAO {
-  id: string;
+  _id: string;
   displayName: string;
   description: string;
   status: string;
@@ -17,7 +17,7 @@ export interface ProductVisualDAO {
 }
 
 export interface ProductPublicDTO {
-  id: string;
+  _id: string;
   displayName: string;
   description: string;
   createdAt: string;
@@ -39,7 +39,7 @@ export interface ProductVisualPublicDTO {
 // EXTRA
 
 export interface ExtraDAO {
-  id: string;
+  _id: string;
   displayName: string;
   description: string;
   status: string;
@@ -49,7 +49,7 @@ export interface ExtraDAO {
 }
 
 export interface ExtraEntryDAO {
-  id: string;
+  _id: string;
   title: string;
   titlePrefix: string;
   status: string;
@@ -69,7 +69,7 @@ export interface ExtraEntryOnSectionDAO {
 }
 
 export interface ExtraEntrySectionDAO {
-  id: string;
+  _id: string;
   title: string;
   titlePrefix: string;
   description: string;
@@ -82,7 +82,7 @@ export interface ExtraEntrySectionDAO {
 }
 
 export interface ExtraDTO {
-  id: string;
+  _id: string;
   displayName: string;
   description: string;
   status: string;
@@ -92,7 +92,7 @@ export interface ExtraDTO {
 }
 
 export interface ExtraEntryDTO {
-  id: string;
+  _id: string;
   title: string;
   titlePrefix: string;
   status: string;
@@ -112,14 +112,14 @@ export interface ExtraEntryOnSectionDTO {
 }
 
 export interface ExtraEntrySectionDTO {
-  id: string;
+  _id: string;
   title: string;
   titlePrefix: string;
   description: string;
   status: string;
   createdAt: string;
   releaseDate: string;
-  extras: ExtraEntryOnSectionDAO[];
+  extras: ExtraEntryOnSectionDTO[];
   maxSelection: number;
   minSelection: number;
 }

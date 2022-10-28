@@ -24,7 +24,7 @@ const createNewExtraEntry = async (
   } = props;
 
   // Verification step
-  const extra = await extraService.getExtraById(extraId);
+  const extra = await extraService.getById(extraId);
 
   if (!extra) {
     throw new Error("Invalid extra");

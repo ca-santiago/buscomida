@@ -15,7 +15,7 @@ const getExtraList = async (
 ): Promise<GetExtraListResult> => {
   const _page = Math.max(1, page);
   const _count = Math.max(10, Math.min(count, 50));
-  const { data, pageCount } = await extraService.getExtrasCount(
+  const { data, pageCount } = await extraService.getCount(
     (_page - 1) * _count,
     _count
   );

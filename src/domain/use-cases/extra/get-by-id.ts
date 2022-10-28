@@ -1,11 +1,10 @@
 import extraMapper from "../../../mappers/extra";
 import { ExtraDTO } from "../../../mappers/types";
 import extraService from "../../../services/extra";
+import { GetModelById } from "../../../services/types";
 
-const getExtraById = async (
-  id: string
-): Promise<ExtraDTO | null> => {
-  const extra = await extraService.getExtraById(id);
+const getExtraById: GetModelById<ExtraDTO> = async (id: string) => {
+  const extra = await extraService.getById(id);
   return extra ? extraMapper.DAOToDTO(extra) : null;
 };
 

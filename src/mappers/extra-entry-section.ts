@@ -19,12 +19,13 @@ const mapExtraEntryOnSectionDAOtoDomain = (
 };
 
 const domainToDAO = (p: ExtraEntrySection): ExtraEntrySectionDAO => {
-  return { ...p };
+  return { ...p, _id: p.id };
 };
 
 const DAOtoDomain = (p: ExtraEntrySectionDAO): ExtraEntrySection => {
   return {
     ...p,
+    id: p._id,
     status: p.status as ItemStatus,
     extras: p.extras.map((es) => mapExtraEntryOnSectionDAOtoDomain(es)),
   };
@@ -33,12 +34,15 @@ const DAOtoDomain = (p: ExtraEntrySectionDAO): ExtraEntrySection => {
 const domainToDTO = (p: ExtraEntrySection): ExtraEntrySectionDTO => {
   return {
     ...p,
+    _id: p.id,
     status: p.status.toString(),
   };
 };
 
 const DAOToDTO = (p: ExtraEntrySectionDAO): ExtraEntrySectionDTO => {
-  return DAOtoDomain(p);
+  return {
+    ...p,
+  };
 };
 
 const extraSectionMapper = {

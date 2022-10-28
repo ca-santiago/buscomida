@@ -1,6 +1,6 @@
 import productMapper from "../../../mappers/product";
 import { ProductPublicDTO } from "../../../mappers/types";
-import productService from "../../../services/product";
+import { productService } from "../../../services";
 
 interface GetProductListResult {
   data: ProductPublicDTO[];
@@ -15,7 +15,7 @@ export const getProductList = async (
 ): Promise<GetProductListResult> => {
   const _page = Math.max(1, page);
   const _count = Math.max(10, Math.min(count, 50));
-  const { data, pageCount } = await productService.getProductsCount(
+  const { data, pageCount } = await productService.getCount(
     (_page - 1) * _count,
     _count
   );

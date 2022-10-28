@@ -1,10 +1,15 @@
 import { ExtraEntrySectionDAO } from "../mappers/types";
+import {
+  GetModelById,
+  GetModelCount,
+  ModelInstanceExist,
+  SaveModel,
+} from "./types";
 
 const extraSectionSections: ExtraEntrySectionDAO[] = [];
 
-export type SaveExtraSection = (e: ExtraEntrySectionDAO) => Promise<boolean>;
-const save: SaveExtraSection = (e) => {
-  const existingOne = extraSectionSections.findIndex(({ id }) => e.id === id);
+const save: SaveModel<ExtraEntrySectionDAO> = (e) => {
+  const existingOne = extraSectionSections.findIndex(({ _id }) => e._id === _id);
   if (existingOne > 0) {
     extraSectionSections[existingOne] = e;
   } else {
@@ -13,22 +18,14 @@ const save: SaveExtraSection = (e) => {
   return Promise.resolve(true);
 };
 
-export type GetExtraSectionById = (eId: string) => Promise<ExtraEntrySectionDAO | null>;
-const getById: GetExtraSectionById = (eId) => {
+const getById: GetModelById<ExtraEntrySectionDAO> = (eId) => {
   return new Promise((res) => {
-    const exist = extraSectionSections.find(({ id }) => eId === id);
+    const exist = extraSectionSections.find(({ _id }) => eId === _id);
     return res(exist || null);
   });
 };
 
-export type GetExtraSectionsCount = (
-  offset: number,
-  count: number
-) => Promise<{
-  pageCount: number;
-  data: ExtraEntrySectionDAO[];
-}>;
-const getCount: GetExtraSectionsCount = (offset, count) => {
+const getCount: GetModelCount<ExtraEntrySectionDAO> = (offset, count) => {
   const data = extraSectionSections.slice(offset, offset + count);
   const pageCount = Math.ceil(extraSectionSections.length / count);
   return Promise.resolve({
@@ -37,9 +34,8 @@ const getCount: GetExtraSectionsCount = (offset, count) => {
   });
 };
 
-export type ExtraSectionExist = (eId: string) => boolean;
-const exist: ExtraSectionExist = (eId: string) => {
-  const existing = extraSectionSections.find((eE) => eE.id === eId);
+const exist: ModelInstanceExist = (eId: string) => {
+  const existing = extraSectionSections.find((eE) => eE._id === eId);
   return existing !== undefined;
 };
 

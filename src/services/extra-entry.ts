@@ -1,10 +1,15 @@
 import { ExtraEntryDAO } from "../mappers/types";
+import {
+  GetModelById,
+  GetModelCount,
+  ModelInstanceExist,
+  SaveModel,
+} from "./types";
 
 const extraEntries: ExtraEntryDAO[] = [];
 
-export type SaveExtraEntry = (e: ExtraEntryDAO) => Promise<boolean>;
-const save: SaveExtraEntry = (e) => {
-  const existingOne = extraEntries.findIndex(({ id }) => e.id === id);
+const save: SaveModel<ExtraEntryDAO> = (e) => {
+  const existingOne = extraEntries.findIndex(({ _id }) => e._id === _id);
   if (existingOne > 0) {
     extraEntries[existingOne] = e;
   } else {
@@ -13,22 +18,14 @@ const save: SaveExtraEntry = (e) => {
   return Promise.resolve(true);
 };
 
-export type GetExtraEntryById = (eId: string) => Promise<ExtraEntryDAO | null>;
-const getById: GetExtraEntryById = (eId) => {
+const getById: GetModelById<ExtraEntryDAO> = (eId) => {
   return new Promise((res) => {
-    const exist = extraEntries.find(({ id }) => eId === id);
+    const exist = extraEntries.find(({ _id }) => eId === _id);
     return res(exist || null);
   });
 };
 
-export type GetExtraEntriesCount = (
-  offset: number,
-  count: number
-) => Promise<{
-  pageCount: number;
-  data: ExtraEntryDAO[];
-}>;
-const getCount: GetExtraEntriesCount = (offset, count) => {
+const getCount: GetModelCount<ExtraEntryDAO> = (offset, count) => {
   const data = extraEntries.slice(offset, offset + count);
   const pageCount = Math.ceil(extraEntries.length / count);
   return Promise.resolve({
@@ -37,9 +34,8 @@ const getCount: GetExtraEntriesCount = (offset, count) => {
   });
 };
 
-export type ExtraEntryExist = (eId: string) => boolean;
-const exist: ExtraEntryExist = (eId: string) => {
-  const existing = extraEntries.find((eE) => eE.id === eId);
+const exist: ModelInstanceExist = (eId: string) => {
+  const existing = extraEntries.find((eE) => eE._id === eId);
   return existing !== undefined;
 };
 

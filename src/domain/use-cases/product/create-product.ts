@@ -1,6 +1,6 @@
 import productMapper from "../../../mappers/product";
 import { ProductPublicDTO } from "../../../mappers/types";
-import productService from "../../../services/product";
+import { productService } from "../../../services";
 import productModel from "../../models/product";
 
 export interface CreateNewProductProps {
@@ -22,7 +22,7 @@ export const createNewProduct = async ({
     displayName,
     price
   });
-  await productService.saveProduct(productMapper.domainToDAO(product));
+  await productService.save(productMapper.domainToDAO(product));
 
   return productMapper.domainToDTO(product);
 };

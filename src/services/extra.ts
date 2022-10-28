@@ -1,11 +1,10 @@
 import { ExtraDAO } from "../mappers/types";
+import { GetModelById, GetModelCount, SaveModel } from "./types";
 
 const extras: ExtraDAO[] = [];
 
-export type SaveExtra = (e: ExtraDAO) => Promise<boolean>;
-
-const save: SaveExtra = (e) => {
-  const existingOne = extras.findIndex(({ id }) => e.id === id);
+const save: SaveModel<ExtraDAO> = (e) => {
+  const existingOne = extras.findIndex(({ _id }) => e._id === _id);
   if (existingOne > 0) {
     extras[existingOne] = e;
   } else {
@@ -14,24 +13,14 @@ const save: SaveExtra = (e) => {
   return Promise.resolve(true);
 };
 
-export type GetExtraById = (eId: string) => Promise<ExtraDAO | null>;
-
-const getExtraById: GetExtraById = (eId) => {
+const getById: GetModelById<ExtraDAO> = (eId) => {
   return new Promise((res) => {
-    const exist = extras.find(({ id }) => eId === id);
+    const exist = extras.find(({ _id }) => eId === _id);
     return res(exist || null);
   });
 };
 
-export type GetExtrasCount = (
-  offset: number,
-  count: number
-) => Promise<{
-  pageCount: number;
-  data: ExtraDAO[];
-}>;
-
-const getExtrasCount: GetExtrasCount = (offset, count) => {
+const getCount: GetModelCount<ExtraDAO> = (offset, count) => {
   const data = extras.slice(offset, offset + count);
   const pageCount = Math.ceil(extras.length / count);
   return Promise.resolve({
@@ -42,8 +31,8 @@ const getExtrasCount: GetExtrasCount = (offset, count) => {
 
 const extraService = {
   save,
-  getExtrasCount,
-  getExtraById,
+  getCount,
+  getById,
 };
 
 export default extraService;
