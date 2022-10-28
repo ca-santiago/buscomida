@@ -1,6 +1,6 @@
 import extraEntryMapper from "../../../mappers/extra-entry";
 import { ExtraEntryDTO } from "../../../mappers/types";
-import extraEntryService from "../../../services/extra-entry";
+import { extraEntryService } from "../../../services";
 import extraEntryModel, {
   CreateDraftExtraEntryProps,
 } from "../../models/entra-entry";

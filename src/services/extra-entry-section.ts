@@ -9,7 +9,9 @@ import {
 const extraSectionSections: ExtraEntrySectionDAO[] = [];
 
 const save: SaveModel<ExtraEntrySectionDAO> = (e) => {
-  const existingOne = extraSectionSections.findIndex(({ _id }) => e._id === _id);
+  const existingOne = extraSectionSections.findIndex(
+    ({ _id }) => e._id === _id
+  );
   if (existingOne > 0) {
     extraSectionSections[existingOne] = e;
   } else {
@@ -36,7 +38,7 @@ const getCount: GetModelCount<ExtraEntrySectionDAO> = (offset, count) => {
 
 const exist: ModelInstanceExist = (eId: string) => {
   const existing = extraSectionSections.find((eE) => eE._id === eId);
-  return existing !== undefined;
+  return Promise.resolve(existing !== undefined);
 };
 
 const extraSectionService = {

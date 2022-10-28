@@ -7,6 +7,6 @@ export type GetModelCount<Output> = (
   pageCount: number;
   data: Output[];
 }>;
-export type ModelInstanceExist = (id: string) => boolean;
+export type ModelInstanceExist = (id: string) => Promise<boolean>;
 
 export type SelectionKeys<T> = (keyof T)[];
