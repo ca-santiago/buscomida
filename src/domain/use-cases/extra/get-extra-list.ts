@@ -1,6 +1,6 @@
 import extraMapper from "../../../mappers/extra";
 import { ExtraDTO } from "../../../mappers/types";
-import extraService from "../../../services/extra";
+import { extraService } from "../../../services";
 
 interface GetExtraListResult {
   data: ExtraDTO[];

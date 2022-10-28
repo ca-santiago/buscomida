@@ -1,7 +1,7 @@
-import mongoose, { Types, Schema } from "mongoose";
+import mongoose from "mongoose";
 import { ProductDAO } from "../../mappers/types";
 
-const productSchema = new Schema<ProductDAO>({
+const productSchema = new mongoose.Schema<ProductDAO>({
   _id: { type: String },
   displayName: String,
   description: String,

@@ -1,6 +1,6 @@
 import extraMapper from "../../../mappers/extra";
 import { ExtraDTO } from "../../../mappers/types";
-import extraService from "../../../services/extra";
+import { extraService } from "../../../services";
 import { GetModelById } from "../../../services/types";
 
 const getExtraById: GetModelById<ExtraDTO> = async (id: string) => {
