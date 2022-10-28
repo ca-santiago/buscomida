@@ -1,6 +1,6 @@
 import express from "express";
 import Joi from "joi";
-import extraEntryUseCases from "../domain/use-cases/entraEntry";
+import extraEntryUseCases from "../domain/use-cases/entra-entry";
 import { listJoiQuery } from "./helpers/list-validator";
 
 export const extraEntriesRouter = express();
