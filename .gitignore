@@ -6,3 +6,5 @@ dist/
 *.tar
 *.*.jar
 *.*.tar
+
+.env
