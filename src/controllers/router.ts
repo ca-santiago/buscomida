@@ -1,7 +1,7 @@
 import express from "express";
 import { extraEntriesRouter } from "./extra-entry";
 import { extrasRouter } from "./extra";
-import { extraSectionsRouter } from "./extra-section";
+import { extraSectionsRouter } from "./extra-sections";
 import { productsRouter } from "./products";
 
 export const apiV1Router = express();
