@@ -1,6 +1,6 @@
 import extraSectionMapper from "../../../mappers/extra-entry-section";
 import { ExtraEntrySectionDTO } from "../../../mappers/types";
-import extraSectionService from "../../../services/extra-entry-section";
+import { extraSectionService } from "../../../services";
 
 interface GetExtraSectionListResult {
   data: ExtraEntrySectionDTO[];

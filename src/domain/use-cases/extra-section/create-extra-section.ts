@@ -1,6 +1,6 @@
 import { ExtraEntrySectionDTO } from "../../../mappers/types";
 import { CreateDraftExtraSectionProps } from "../../models/extra-section";
-import extraSectionService from "../../../services/extra-entry-section";
+import { extraSectionService } from "../../../services";
 import extraSectionModel from "../../models/extra-section";
 import extraSectionMapper from "../../../mappers/extra-entry-section";
 
