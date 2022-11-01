@@ -7,7 +7,7 @@ const schema = Joi.object().keys({
   count: Joi.number(),
 });
 
-export const getProducts = async (
+export const getProductsRoute = async (
   req: express.Request,
   res: express.Response
 ) => {

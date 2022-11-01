@@ -1,5 +1,5 @@
 import express from "express";
-import { extraEntriesRouter } from "./entra-entry";
+import { extraEntriesRouter } from "./extra-entry";
 import { extraRouter } from "./extra";
 import { extraSectionsRouter } from "./extra-section";
 import { productRouter } from "./products";

@@ -1,7 +1,7 @@
 import express from "express";
 import { createProductRoute } from "./create-product";
 import { getProductByIdRoute } from "./get-product-by-id";
-import { getProducts } from "./get-products";
+import { getProductsRoute } from "./get-products";
 import { updateProductExtraRoute } from "./udpate-extras";
 export * from "./udpate-extras";
 
@@ -13,4 +13,4 @@ productRouter.get("/:id", getProductByIdRoute);
 
 productRouter.post("/", createProductRoute);
 
-productRouter.get("/", getProducts);
+productRouter.get("/", getProductsRoute);
