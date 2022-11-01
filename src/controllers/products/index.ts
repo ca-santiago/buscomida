@@ -5,12 +5,12 @@ import { getProductsRoute } from "./get-products";
 import { updateProductExtraRoute } from "./udpate-extras";
 export * from "./udpate-extras";
 
-export const productRouter = express();
+export const productsRouter = express();
 
-productRouter.patch("/:id", updateProductExtraRoute);
+productsRouter.patch("/:id", updateProductExtraRoute);
 
-productRouter.get("/:id", getProductByIdRoute);
+productsRouter.get("/:id", getProductByIdRoute);
 
-productRouter.post("/", createProductRoute);
+productsRouter.post("/", createProductRoute);
 
-productRouter.get("/", getProductsRoute);
+productsRouter.get("/", getProductsRoute);
