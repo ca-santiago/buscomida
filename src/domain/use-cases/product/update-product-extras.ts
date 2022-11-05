@@ -8,33 +8,10 @@ import {
   productService,
 } from "../../../services";
 import { Extra, ExtraEntrySection, Product } from "../../models/types";
+import { existAndIsNotDraft } from "../helpers/exist-draft";
+import { getProductOrError } from "./product-or-error";
 
-const existAndIsNotDraft = (e: Extra | ExtraEntrySection | null): Boolean => {
-  if (!e) return false;
-  // TODO: replace when it is possible to publish extras
-  // return e.status !== "DRAFT";
-  return true;
-};
-
-const getProductOrError = async (id: string): Promise<Product> => {
-  const product = await productService
-    .getById(id)
-    .then((p) => (p ? productMapper.DAOtoDomain(p) : null));
-
-  if (!product) {
-    // TODO - Throw 404 error
-    throw new Error("Product does not exist");
-  }
-
-  if (product.status !== "DRAFT") {
-    // TODO - Throw unauthorized
-    throw new Error("Published products cannot be udpated");
-  }
-
-  return product;
-};
-
-interface UpdateProductExtrasProps {
+export interface UpdateProductExtrasProps {
   pId: string;
   extrasIds: string[];
   extrasSectionsIds: string[];

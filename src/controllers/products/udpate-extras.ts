@@ -1,16 +1,13 @@
 import express from "express";
 import Joi from "joi";
 import productUseCases from "../../domain/use-cases/product";
+import { UpdateProductExtrasProps } from "../../domain/use-cases/product/update-product-extras";
 
-interface SchemaValues {
-  extras: string[];
-  extrasSections: string[];
-  order: string[];
-}
+interface SchemaValues extends Omit<UpdateProductExtrasProps, "pId"> {}
 
 const schema = Joi.object<SchemaValues>().keys({
-  extras: Joi.array().items(Joi.string()).required(),
-  extrasSections: Joi.array().items(Joi.string()).required(),
+  extrasIds: Joi.array().items(Joi.string()).required(),
+  extrasSectionsIds: Joi.array().items(Joi.string()).required(),
   order: Joi.array().items(Joi.string()).required(),
 });
 
@@ -29,8 +26,8 @@ export const updateProductExtraRoute = async (
     const product = await productUseCases.updateExtras({
       pId: id,
       order: value.order,
-      extrasIds: value.extras,
-      extrasSectionsIds: value.extrasSections,
+      extrasIds: value.extrasIds,
+      extrasSectionsIds: value.extrasSectionsIds,
     });
     res.status(200).json({ product });
     return;
