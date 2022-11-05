@@ -1,10 +1,15 @@
 import extraMapper from "../../../mappers/extra";
+import extraSectionMapper from "../../../mappers/extra-entry-section";
 import productMapper from "../../../mappers/product";
 import { ProductPublicDTO } from "../../../mappers/types";
-import { extraService, productService } from "../../../services";
-import { Extra, Product } from "../../models/types";
+import {
+  extraSectionService,
+  extraService,
+  productService,
+} from "../../../services";
+import { Extra, ExtraEntrySection, Product } from "../../models/types";
 
-const extraExistAndIsNotDraft = (e: Extra | null): Boolean => {
+const existAndIsNotDraft = (e: Extra | ExtraEntrySection | null): Boolean => {
   if (!e) return false;
   // TODO: replace when it is possible to publish extras
   // return e.status !== "DRAFT";
@@ -31,46 +36,62 @@ const getProductOrError = async (id: string): Promise<Product> => {
 
 interface UpdateProductExtrasProps {
   pId: string;
-  extraIds: string[];
+  extrasIds: string[];
+  extrasSectionsIds: string[];
+  order: string[];
 }
 
 export const updateProductExtras = async ({
-  extraIds,
   pId,
+  order,
+  extrasIds,
+  extrasSectionsIds,
 }: UpdateProductExtrasProps): Promise<ProductPublicDTO> => {
   const product = await getProductOrError(pId);
 
   // Fetch extras
   const extrasFromDatabase = await Promise.all(
-    extraIds.map((id) => {
+    extrasIds.map((id) => {
       return extraService.getById(id);
     })
   ).then((extras) => {
     return extras.map((e) => (e ? extraMapper.DAOtoDomain(e) : null));
   });
 
+  // Fetch extra sections
+  const extraSectionsFromDatabase = await Promise.all(
+    extrasSectionsIds.map((id) => {
+      return extraSectionService.getById(id);
+    })
+  ).then((extras) => {
+    return extras.map((e) => (e ? extraSectionMapper.DAOtoDomain(e) : null));
+  });
+
   // Validate extras
   // - They all exist
   // - They are not draft
-  const theyExistsAndAreNotDraft = extrasFromDatabase.every(
-    extraExistAndIsNotDraft
-  );
+  const allExtrasAreValid = extrasFromDatabase.every(existAndIsNotDraft);
+  const allSectionAreValid =
+    extraSectionsFromDatabase.every(existAndIsNotDraft);
 
-  if (theyExistsAndAreNotDraft === false) {
-    // TODO - Throw 400
+  if (!allExtrasAreValid) {
+    // TODO - Throw 400 standard error
     throw new Error("Invalid extras");
   }
 
-  const updatedProduct = {
+  if (!allSectionAreValid) {
+    // TODO - Throw 400 standard error
+    throw new Error("Invalid extra sections");
+  }
+
+  const updatedProduct: Product = {
     ...product,
-    extras: extraIds,
-    // TODO - Create a function that upsert the new ids in order. Keep the existing ids and remove the deleted ones
-    extrasListOrder: [],
+    extras: extrasIds,
+    extrasSections: extrasSectionsIds,
+    // TODO - Create a filter function that sanitize this list
+    extrasListOrder: order,
   };
 
   await productService.save(productMapper.domainToDAO(updatedProduct));
   return productMapper.domainToDTO(updatedProduct);
 };
-
-interface UpdateProductExtrasSectionProps {}
-interface UpdateProductExtrasOrderProps {}

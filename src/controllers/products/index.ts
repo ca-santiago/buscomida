@@ -7,7 +7,7 @@ export * from "./udpate-extras";
 
 export const productsRouter = express();
 
-productsRouter.patch("/:id", updateProductExtraRoute);
+productsRouter.patch("/:id/extras", updateProductExtraRoute);
 
 productsRouter.get("/:id", getProductByIdRoute);
 
