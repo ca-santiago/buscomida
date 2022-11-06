@@ -7,7 +7,7 @@ import {
   extraService,
   productService,
 } from "../../../services";
-import { Extra, ExtraEntrySection, Product } from "../../models/types";
+import { Product } from "../../models/types";
 import { existAndIsNotDraft } from "../helpers/exist-draft";
 import { getProductOrError } from "./product-or-error";
 
