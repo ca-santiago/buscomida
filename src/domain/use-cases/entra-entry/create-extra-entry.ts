@@ -5,6 +5,7 @@ import extraEntryModel, {
   CreateDraftExtraEntryProps,
 } from "../../models/entra-entry";
 import { extraService } from "../../../services";
+import { saveExtraEntry } from "./save-extra-entry";
 
 export interface CreateNewExtraEntryProps extends CreateDraftExtraEntryProps {}
 
@@ -44,10 +45,7 @@ const createNewExtraEntry = async (
     titlePrefix,
   });
 
-  // Save it
-  await extraEntryService.save(extraEntryMapper.domainToDAO(extraEntry));
-  // Map it back
-  return extraEntryMapper.domainToDTO(extraEntry);
+  return await saveExtraEntry(extraEntry);
 };
 
 export default createNewExtraEntry;

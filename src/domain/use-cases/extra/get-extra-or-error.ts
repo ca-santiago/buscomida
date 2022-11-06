@@ -5,7 +5,7 @@ import { Extra } from "../../models/types";
 export const getExtraOrError = async (id: string): Promise<Extra> => {
   const extra = await extraService
     .getById(id)
-    .then((p) => (p ? extraMapper.DAOtoDomain(p) : null));
+    .then((e) => (e ? extraMapper.DAOtoDomain(e) : null));
 
   if (!extra) {
     // TODO - Throw 404 error

@@ -1,8 +1,7 @@
 import { ExtraEntrySectionDTO } from "../../../mappers/types";
 import { CreateDraftExtraSectionProps } from "../../models/extra-section";
-import { extraSectionService } from "../../../services";
 import extraSectionModel from "../../models/extra-section";
-import extraSectionMapper from "../../../mappers/extra-entry-section";
+import { saveExtraSection } from "./save-extra-section";
 
 export interface CreateExtraSectionProps extends CreateDraftExtraSectionProps {}
 
@@ -29,11 +28,7 @@ const createNewExtraSection = async ({
     titlePrefix,
   });
 
-  // Save it
-  await extraSectionService.save(extraSectionMapper.domainToDAO(extraSection));
-
-  // Map it back
-  return extraSectionMapper.domainToDTO(extraSection);
+  return await saveExtraSection(extraSection);
 };
 
 export default createNewExtraSection;

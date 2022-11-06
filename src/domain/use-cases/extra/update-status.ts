@@ -4,12 +4,12 @@ import { getExtraOrError } from "./get-extra-or-error";
 import { saveExtra } from "./save-extra";
 
 export interface UpdateExtraStatusProps {
-  pId: string;
+  id: string;
   status: ItemStatus;
 }
 
 export const updateExtraStatus = async ({
-  pId,
+  id,
   status,
 }: UpdateExtraStatusProps) => {
   if (!(status in ItemStatusEnum)) {
@@ -21,7 +21,7 @@ export const updateExtraStatus = async ({
     throw new Error("Invalid operation");
   }
   const extraStatusManager = buildStatusManager<Extra>();
-  const extra = await getExtraOrError(pId);
+  const extra = await getExtraOrError(id);
 
   const updatedExtra = extraStatusManager(status, extra);
   return await saveExtra(updatedExtra);

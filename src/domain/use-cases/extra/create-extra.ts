@@ -1,7 +1,6 @@
-import extraMapper from "../../../mappers/extra";
 import { ExtraDTO } from "../../../mappers/types";
-import { extraService } from "../../../services";
 import extraModel from "../../models/extra";
+import { saveExtra } from "./save-extra";
 
 export interface CreateNewExtraProps {
   displayName: string;
@@ -22,9 +21,7 @@ const createNewExtra = async ({
     displayName,
     addedPrice: price,
   });
-  await extraService.save(extraMapper.domainToDAO(extra));
-
-  return extraMapper.domainToDTO(extra);
+  return await saveExtra(extra);
 };
 
 export default createNewExtra;
