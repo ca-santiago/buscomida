@@ -11,10 +11,14 @@ const disableItem = <T extends WithStatus>(item: T): T => {
 };
 
 export const buildStatusManager = <T extends WithStatus>() => {
-  return {
-    publish: publishItem,
-    disable: disableItem,
+  return (status: ItemStatus, item: T): T => {
+    switch (status) {
+      case "ACTIVE":
+        return publishItem(item);
+      case "DISABLED":
+        return disableItem(item);
+      default:
+        return item;
+    }
   };
 };
-
-const statusDispacher = () => {};

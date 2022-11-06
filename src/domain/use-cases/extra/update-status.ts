@@ -1,4 +1,4 @@
-import { ItemStatus, ItemStatusEnum } from "../../models/types";
+import { Extra, ItemStatus, ItemStatusEnum } from "../../models/types";
 import { buildStatusManager } from "../status-manager";
 import { getExtraOrError } from "./get-extra-or-error";
 import { saveExtra } from "./save-extra";
@@ -20,9 +20,9 @@ export const updateExtraStatus = async ({
     // TODO: throw 403 standard error
     throw new Error("Invalid operation");
   }
-  const extraStatusManager = buildStatusManager();
+  const extraStatusManager = buildStatusManager<Extra>();
   const extra = await getExtraOrError(pId);
 
-  const updatedExtra = extraStatusManager.publish(extra);
+  const updatedExtra = extraStatusManager(status, extra);
   return await saveExtra(updatedExtra);
 };

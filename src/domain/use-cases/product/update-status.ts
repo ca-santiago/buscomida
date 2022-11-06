@@ -1,4 +1,4 @@
-import { ItemStatus, ItemStatusEnum } from "../../models/types";
+import { ItemStatus, ItemStatusEnum, Product } from "../../models/types";
 import { buildStatusManager } from "../status-manager";
 import { getProductOrError } from "./product-or-error";
 import { saveProduct } from "./save-product";
@@ -20,9 +20,9 @@ export const updateProductStatus = async ({
     // TODO: throw 403 standard error
     throw new Error("Invalid operation");
   }
-  const productStatusManager = buildStatusManager();
+  const productStatusManager = buildStatusManager<Product>();
   const product = await getProductOrError(pId);
 
-  const updatedProduct = productStatusManager.publish(product);
+  const updatedProduct = productStatusManager(status, product);
   return await saveProduct(updatedProduct);
 };
