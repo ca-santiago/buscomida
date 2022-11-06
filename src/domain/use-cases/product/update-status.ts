@@ -1,0 +1,28 @@
+import { ItemStatus, ItemStatusEnum } from "../../models/types";
+import { buildStatusManager } from "../status-manager";
+import { getProductOrError } from "./product-or-error";
+import { saveProduct } from "./save-product";
+
+export interface UpdateProductStatusProps {
+  pId: string;
+  status: ItemStatus;
+}
+
+export const updateProductStatus = async ({
+  pId,
+  status,
+}: UpdateProductStatusProps) => {
+  if (!(status in ItemStatusEnum)) {
+    // TODO: throw 400 standard error
+    throw new Error("Invalid status value");
+  }
+  if (status === "DRAFT") {
+    // TODO: throw 403 standard error
+    throw new Error("Invalid operation");
+  }
+  const productStatusManager = buildStatusManager();
+  const product = await getProductOrError(pId);
+
+  const updatedProduct = productStatusManager.publish(product);
+  return await saveProduct(updatedProduct);
+};

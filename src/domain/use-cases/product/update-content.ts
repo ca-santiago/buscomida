@@ -19,8 +19,8 @@ export const updateProductContent = async ({
   const product = await getProductOrError(pId);
 
   if (product.status !== "DRAFT") {
-    // TODO - Throw 403 standard error
-    throw new Error("Cannot update this product");
+    // TODO - Throw unauthorized
+    throw new Error("Published products cannot be udpated");
   }
 
   const updatedProduct: Product = {

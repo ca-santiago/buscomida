@@ -12,10 +12,5 @@ export const getProductOrError = async (id: string): Promise<Product> => {
     throw new Error("Product does not exist");
   }
 
-  if (product.status !== "DRAFT") {
-    // TODO - Throw unauthorized
-    throw new Error("Published products cannot be udpated");
-  }
-
   return product;
 };

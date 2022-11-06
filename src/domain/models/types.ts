@@ -6,6 +6,13 @@
  * - DISCONTINUED = No longer available. No future use
  */
 export type ItemStatus = "DRAFT" | "ACTIVE" | "DISABLED" | "DISCONTINUED";
+export const ItemStatusKeys = ["DRAFT", "ACTIVE", "DISABLED", "DISCONTINUED"];
+export enum ItemStatusEnum {
+  "DRAFT" = "DRAFT",
+  "ACTIVE" = "ACTIVE",
+  "DISABLED" = "DISABLED",
+  "DISCONTINUED" = "DISCONTINUED",
+}
 
 export type Price = number;
 

@@ -26,6 +26,11 @@ export const updateProductExtras = async ({
 }: UpdateProductExtrasProps): Promise<ProductPublicDTO> => {
   const product = await getProductOrError(pId);
 
+  if (product.status !== "DRAFT") {
+    // TODO - Throw unauthorized
+    throw new Error("Published products cannot be udpated");
+  }
+
   // Fetch extras
   const extrasFromDatabase = await Promise.all(
     extrasIds.map((id) => {
