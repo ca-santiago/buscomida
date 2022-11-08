@@ -1,7 +1,8 @@
-import express from "express";
+import { Request, Response } from "express";
 import Joi from "joi";
 import productUseCases from "../../domain/use-cases/product";
 import { UpdateProductStatusProps } from "../../domain/use-cases/product/update-status";
+import { withRouteErrorBoundary } from "../helpers/with-error-boundary";
 
 interface SchemaValues extends Omit<UpdateProductStatusProps, "pId"> {}
 
@@ -9,10 +10,7 @@ const schema = Joi.object<SchemaValues>().keys({
   status: Joi.string().valid("DISABLED", "ACTIVE").exist(),
 });
 
-export const updateProductStatusRoute = async (
-  req: express.Request,
-  res: express.Response
-) => {
+const updateProductStatus = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { value, error } = schema.validate(req.body);
 
@@ -20,13 +18,12 @@ export const updateProductStatusRoute = async (
     return res.status(400).send(error.message);
   }
 
-  try {
-    const product = await productUseCases.updateStatus({
-      pId: id,
-      status: value.status,
-    });
-    res.status(200).json({ product });
-  } catch (err: any) {
-    return res.status(500).send(err.message).end();
-  }
+  const product = await productUseCases.updateStatus({
+    pId: id,
+    status: value.status,
+  });
+  return res.status(200).json({ product }).end();
 };
+
+export const updateProductStatusRoute =
+  withRouteErrorBoundary(updateProductStatus);

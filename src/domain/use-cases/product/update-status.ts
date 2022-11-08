@@ -1,3 +1,4 @@
+import { ForbiddenError } from "../../errors";
 import { ItemStatus, ItemStatusEnum, Product } from "../../models/types";
 import { buildStatusManager } from "../status-manager";
 import { getProductOrError } from "./product-or-error";
@@ -16,9 +17,8 @@ export const updateProductStatus = async ({
     // TODO: throw 400 standard error
     throw new Error("Invalid status value");
   }
-  if (status === "DRAFT") {
-    // TODO: throw 403 standard error
-    throw new Error("Invalid operation");
+  if (status !== "DRAFT") {
+    throw new ForbiddenError();
   }
   const productStatusManager = buildStatusManager<Product>();
   const product = await getProductOrError(pId);
