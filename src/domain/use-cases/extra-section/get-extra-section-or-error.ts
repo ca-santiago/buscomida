@@ -1,5 +1,6 @@
 import extraEntrySectionMapper from "../../../mappers/extra-entry-section";
 import { extraSectionService } from "../../../services";
+import { NotFound } from "../../errors";
 import { ExtraEntrySection } from "../../models/types";
 
 export const getExtraEntrySectionOrError = async (
@@ -10,8 +11,7 @@ export const getExtraEntrySectionOrError = async (
     .then((e) => (e ? extraEntrySectionMapper.DAOtoDomain(e) : null));
 
   if (!extraEntrySection) {
-    // TODO - Throw 404 error
-    throw new Error("ExtraEntrySection does not exist");
+    throw new NotFound();
   }
 
   return extraEntrySection;

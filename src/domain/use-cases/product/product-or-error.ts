@@ -1,5 +1,6 @@
 import productMapper from "../../../mappers/product";
 import { productService } from "../../../services";
+import { NotFound } from "../../errors";
 import { Product } from "../../models/types";
 
 export const getProductOrError = async (id: string): Promise<Product> => {
@@ -8,8 +9,7 @@ export const getProductOrError = async (id: string): Promise<Product> => {
     .then((p) => (p ? productMapper.DAOtoDomain(p) : null));
 
   if (!product) {
-    // TODO - Throw 404 error
-    throw new Error("Product does not exist");
+    throw new NotFound();
   }
 
   return product;

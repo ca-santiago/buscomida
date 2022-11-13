@@ -1,5 +1,7 @@
 import productMapper from "../../../mappers/product";
+import { ForbiddenError } from "../../errors";
 import { Product } from "../../models/types";
+import { hasActiveStatus } from "../helpers/exist-draft";
 import { getProductOrError } from "./product-or-error";
 import { saveProduct } from "./save-product";
 
@@ -20,9 +22,8 @@ export const updateProductContent = async ({
 
   // TODO: - Add possibility to update disabled products
   // Should this be just the price and naming and description?
-  if (product.status !== "DRAFT") {
-    // TODO - Throw unauthorized
-    throw new Error("Published products cannot be udpated");
+  if (hasActiveStatus(product)) {
+    throw new ForbiddenError("Published products cannot be udpated");
   }
 
   const updatedProduct: Product = {

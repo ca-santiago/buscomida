@@ -1,5 +1,6 @@
 import extraMapper from "../../../mappers/extra";
 import { extraService } from "../../../services";
+import { NotFound } from "../../errors";
 import { Extra } from "../../models/types";
 
 export const getExtraOrError = async (id: string): Promise<Extra> => {
@@ -8,8 +9,7 @@ export const getExtraOrError = async (id: string): Promise<Extra> => {
     .then((e) => (e ? extraMapper.DAOtoDomain(e) : null));
 
   if (!extra) {
-    // TODO - Throw 404 error
-    throw new Error("Extra does not exist");
+    throw new NotFound();
   }
 
   return extra;

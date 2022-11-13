@@ -9,9 +9,9 @@
 - [ ] Add useCases/controller error catching system
     - [x] Create error handler
     - [x] Standard errors 
-    - [ ] Implement withRouteErrorHanlder for every route
+    - [x] Implement withRouteErrorHanlder for every route
         - Remove try catch statements
-    - [ ] 
+    - [ ] Create and implement standard error variations
 
 ### General 
 

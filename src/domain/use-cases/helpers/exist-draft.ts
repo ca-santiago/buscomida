@@ -6,7 +6,14 @@ interface DraftObject {
 
 export const existAndIsNotDraft = (e: DraftObject | null): Boolean => {
   if (!e) return false;
-  // TODO: replace when it is possible to publish extras
-  // return e.status !== "DRAFT";
-  return true;
+  return e.status !== "DRAFT";
+};
+
+export const existAndIsActive = (e: DraftObject | null): Boolean => {
+  if (!e) return false;
+  return hasActiveStatus(e);
+};
+
+export const hasActiveStatus = (e: DraftObject): Boolean => {
+  return e.status === "ACTIVE";
 };

@@ -7,8 +7,9 @@ import {
   extraService,
   productService,
 } from "../../../services";
+import { BadResourceUpdateValues, ForbiddenError } from "../../errors";
 import { Product } from "../../models/types";
-import { existAndIsNotDraft } from "../helpers/exist-draft";
+import { existAndIsActive } from "../helpers/exist-draft";
 import { getProductOrError } from "./product-or-error";
 
 export interface UpdateProductExtrasProps {
@@ -27,8 +28,7 @@ export const updateProductExtras = async ({
   const product = await getProductOrError(pId);
 
   if (product.status !== "DRAFT") {
-    // TODO - Throw unauthorized
-    throw new Error("Published products cannot be udpated");
+    throw new ForbiddenError("Published products cannot be udpated");
   }
 
   // Fetch extras
@@ -52,25 +52,21 @@ export const updateProductExtras = async ({
   // Validate extras
   // - They all exist
   // - They are not draft
-  const allExtrasAreValid = extrasFromDatabase.every(existAndIsNotDraft);
-  const allSectionAreValid =
-    extraSectionsFromDatabase.every(existAndIsNotDraft);
+  const allExtrasAreValid = extrasFromDatabase.every(existAndIsActive);
+  const allSectionAreValid = extraSectionsFromDatabase.every(existAndIsActive);
 
-  if (!allExtrasAreValid) {
-    // TODO - Throw 400 standard error
-    throw new Error("Invalid extras");
+  if (!allExtrasAreValid || !allSectionAreValid) {
+    throw new BadResourceUpdateValues(
+      "You can only use existing and active extras"
+    );
   }
 
-  if (!allSectionAreValid) {
-    // TODO - Throw 400 standard error
-    throw new Error("Invalid extra sections");
-  }
-
+  // TODO: Sanitize list order, extras and extra sections
+  // sanitize includes: remove duplicated.
   const updatedProduct: Product = {
     ...product,
     extras: extrasIds,
     extrasSections: extrasSectionsIds,
-    // TODO - Create a filter function that sanitize this list
     extrasListOrder: order,
   };
 
