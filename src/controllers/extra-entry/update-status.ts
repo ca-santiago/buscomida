@@ -20,13 +20,9 @@ export const updateExtraEntryStatusRoute = async (
     return res.status(400).send(error.message);
   }
 
-  try {
-    const extraEntry = await extraEntryUseCases.updateStatus({
-      id,
-      status: value.status,
-    });
-    res.status(200).json({ extraEntry });
-  } catch (err: any) {
-    return res.status(500).send(err.message).end();
-  }
+  const extraEntry = await extraEntryUseCases.updateStatus({
+    id,
+    status: value.status,
+  });
+  res.status(200).json({ extraEntry });
 };

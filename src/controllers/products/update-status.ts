@@ -10,7 +10,7 @@ const schema = Joi.object<SchemaValues>().keys({
   status: Joi.string().valid("DISABLED", "ACTIVE").exist(),
 });
 
-const updateProductStatus = async (req: Request, res: Response) => {
+export const updateProductStatusRoute = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { value, error } = schema.validate(req.body);
 
@@ -22,8 +22,5 @@ const updateProductStatus = async (req: Request, res: Response) => {
     pId: id,
     status: value.status,
   });
-  return res.status(200).json({ product }).end();
+  res.status(200).json({ product }).end();
 };
-
-export const updateProductStatusRoute =
-  withRouteErrorBoundary(updateProductStatus);

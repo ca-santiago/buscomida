@@ -22,17 +22,12 @@ export const updateProductContentRoute = async (
     return res.status(400).send(error.message);
   }
 
-  try {
-    const { description, displayName, price } = value;
-    const product = await productUseCases.updateContent({
-      pId: id,
-      description,
-      displayName,
-      price,
-    });
-    res.status(200).json({ product });
-    return;
-  } catch (err: any) {
-    return res.status(500).send(err.message).end();
-  }
+  const { description, displayName, price } = value;
+  const product = await productUseCases.updateContent({
+    pId: id,
+    description,
+    displayName,
+    price,
+  });
+  res.status(200).json({ product });
 };

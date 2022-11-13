@@ -6,15 +6,6 @@ export const getExtraByIdRoute = async (
   res: express.Response
 ) => {
   const { id } = req.params;
-  try {
-    const extra = await extraUseCases.getExtraById(id);
-
-    if (extra) {
-      res.status(200).json({ extra });
-    } else {
-      res.status(404).end();
-    }
-  } catch (err) {
-    return res.status(500);
-  }
+  const data = await extraUseCases.getExtraById(id);
+  data ? res.status(200).json({ data }) : res.status(404).end();
 };

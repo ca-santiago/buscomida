@@ -1,4 +1,5 @@
 import express from "express";
+import { withRouteErrorBoundary } from "../helpers/with-error-boundary";
 import { createProductRoute } from "./create-product";
 import { getProductByIdRoute } from "./get-product-by-id";
 import { getProductsRoute } from "./get-products";
@@ -8,14 +9,23 @@ import { updateProductStatusRoute } from "./update-status";
 
 export const productsRouter = express();
 
-productsRouter.put("/:id/extras", updateProductExtraRoute);
+productsRouter.put(
+  "/:id/extras",
+  withRouteErrorBoundary(updateProductExtraRoute)
+);
 
-productsRouter.put("/:id/content", updateProductContentRoute);
+productsRouter.put(
+  "/:id/content",
+  withRouteErrorBoundary(updateProductContentRoute)
+);
 
-productsRouter.put("/:id/status", updateProductStatusRoute);
+productsRouter.put(
+  "/:id/status",
+  withRouteErrorBoundary(updateProductStatusRoute)
+);
 
-productsRouter.get("/:id", getProductByIdRoute);
+productsRouter.get("/:id", withRouteErrorBoundary(getProductByIdRoute));
 
-productsRouter.post("/", createProductRoute);
+productsRouter.post("/", withRouteErrorBoundary(createProductRoute));
 
-productsRouter.get("/", getProductsRoute);
+productsRouter.get("/", withRouteErrorBoundary(getProductsRoute));

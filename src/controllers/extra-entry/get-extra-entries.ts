@@ -6,6 +6,7 @@ export const getExtraEntriesRoute = async (
   req: express.Request,
   res: express.Response
 ) => {
+  // TODO: Handle those query params
   let count;
   let page;
   if (req.query.page || req.query.count) {

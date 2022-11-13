@@ -22,16 +22,11 @@ export const updateProductExtraRoute = async (
     return res.status(400).send(error.message);
   }
 
-  try {
-    const product = await productUseCases.updateExtras({
-      pId: id,
-      order: value.order,
-      extrasIds: value.extrasIds,
-      extrasSectionsIds: value.extrasSectionsIds,
-    });
-    res.status(200).json({ product });
-    return;
-  } catch (err: any) {
-    return res.status(500).send(err.message).end();
-  }
+  const product = await productUseCases.updateExtras({
+    pId: id,
+    order: value.order,
+    extrasIds: value.extrasIds,
+    extrasSectionsIds: value.extrasSectionsIds,
+  });
+  res.status(200).json({ product });
 };

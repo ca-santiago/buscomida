@@ -6,15 +6,12 @@ export const getProductByIdRoute = async (
   res: express.Response
 ) => {
   const { id } = req.params;
-  try {
-    const product = await productUseCases.getProductById(id);
 
-    if (product) {
-      res.status(200).json({ product });
-    } else {
-      res.status(404).end();
-    }
-  } catch (err) {
-    return res.status(500);
+  const product = await productUseCases.getProductById(id);
+
+  if (product) {
+    res.status(200).json({ product });
+  } else {
+    res.status(404).end();
   }
 };

@@ -1,11 +1,6 @@
 import express from "express";
-import Joi from "joi";
 import productUseCases from "../../domain/use-cases/product";
-
-const schema = Joi.object().keys({
-  page: Joi.number(),
-  count: Joi.number(),
-});
+import { listJoiQuery } from "../helpers/list-validator";
 
 export const getProductsRoute = async (
   req: express.Request,
@@ -13,8 +8,9 @@ export const getProductsRoute = async (
 ) => {
   let count;
   let page;
+
   if (req.query.page || req.query.count) {
-    const { error, value } = schema.validate(req.query);
+    const { error, value } = listJoiQuery.validate(req.query);
     if (error) {
       return res.status(400).json(error.message);
     }

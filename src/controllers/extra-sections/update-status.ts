@@ -3,7 +3,7 @@ import Joi from "joi";
 import extraSectionUseCases from "../../domain/use-cases/extra-section";
 import { UpdateExtraSectionStatusProps } from "../../domain/use-cases/extra-section/update-status";
 
-interface SchemaValues extends Omit<UpdateExtraSectionStatusProps, "pId"> {}
+interface SchemaValues extends Omit<UpdateExtraSectionStatusProps, "id"> {}
 
 const schema = Joi.object<SchemaValues>().keys({
   status: Joi.string().valid("DISABLED", "ACTIVE").exist(),
@@ -20,13 +20,9 @@ export const updateExtraSectionStatusRoute = async (
     return res.status(400).send(error.message);
   }
 
-  try {
-    const extraEntry = await extraSectionUseCases.updateStatus({
-      id,
-      status: value.status,
-    });
-    res.status(200).json({ extraEntry });
-  } catch (err: any) {
-    return res.status(500).send(err.message).end();
-  }
+  const extraEntry = await extraSectionUseCases.updateStatus({
+    id,
+    status: value.status,
+  });
+  res.status(200).json({ extraEntry });
 };
