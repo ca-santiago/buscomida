@@ -1,11 +1,11 @@
 import extraEntrySectionMapper from "../../../mappers/extra-entry-section";
 import { extraSectionService } from "../../../services";
 import { NotFound } from "../../errors";
-import { ExtraEntrySection } from "../../models/types";
+import { ExtraSection } from "../../models/types";
 
 export const getExtraEntrySectionOrError = async (
   id: string
-): Promise<ExtraEntrySection> => {
+): Promise<ExtraSection> => {
   const extraEntrySection = await extraSectionService
     .getById(id)
     .then((e) => (e ? extraEntrySectionMapper.DAOtoDomain(e) : null));

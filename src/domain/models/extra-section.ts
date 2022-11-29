@@ -1,5 +1,5 @@
 import { v4 } from "uuid";
-import { ExtraEntrySection } from "./types";
+import { ExtraSection } from "./types";
 
 export interface CreateDraftExtraSectionProps {
   title: string;
@@ -7,6 +7,7 @@ export interface CreateDraftExtraSectionProps {
   description: string;
   maxSelection: number;
   minSelection: number;
+  showFirstItemName: boolean;
 }
 
 const createDraft = ({
@@ -15,7 +16,8 @@ const createDraft = ({
   minSelection,
   title,
   titlePrefix,
-}: CreateDraftExtraSectionProps): ExtraEntrySection => {
+  showFirstItemName,
+}: CreateDraftExtraSectionProps): ExtraSection => {
   return {
     id: v4(),
     status: "DRAFT",
@@ -27,6 +29,7 @@ const createDraft = ({
     createdAt: Date.now().toString(),
     maxSelection,
     minSelection,
+    showFirstItemName,
   };
 };
 

@@ -1,28 +1,28 @@
 import {
   ItemStatus,
-  ExtraEntrySection,
-  ExtraEntryOnSection,
+  ExtraSection,
+  ExtraSectionItem,
 } from "../domain/models/types";
 import {
   ExtraEntryOnSectionDAO,
-  ExtraEntrySectionDAO,
-  ExtraEntrySectionDTO,
+  ExtraSectionDAO,
+  ExtraSectionDTO,
 } from "./types";
 
 const mapExtraEntryOnSectionDAOtoDomain = (
   e: ExtraEntryOnSectionDAO
-): ExtraEntryOnSection => {
+): ExtraSectionItem => {
   return {
     ...e,
     status: e.status as ItemStatus,
   };
 };
 
-const domainToDAO = (p: ExtraEntrySection): ExtraEntrySectionDAO => {
+const domainToDAO = (p: ExtraSection): ExtraSectionDAO => {
   return { ...p, _id: p.id };
 };
 
-const DAOtoDomain = (p: ExtraEntrySectionDAO): ExtraEntrySection => {
+const DAOtoDomain = (p: ExtraSectionDAO): ExtraSection => {
   return {
     ...p,
     id: p._id,
@@ -31,17 +31,18 @@ const DAOtoDomain = (p: ExtraEntrySectionDAO): ExtraEntrySection => {
   };
 };
 
-const domainToDTO = (p: ExtraEntrySection): ExtraEntrySectionDTO => {
+const domainToDTO = (p: ExtraSection): ExtraSectionDTO => {
   return {
     ...p,
-    _id: p.id,
     status: p.status.toString(),
   };
 };
 
-const DAOToDTO = (p: ExtraEntrySectionDAO): ExtraEntrySectionDTO => {
+const DAOToDTO = (p: ExtraSectionDAO): ExtraSectionDTO => {
+  const { _id, ...payload } = p;
   return {
-    ...p,
+    id: _id,
+    ...payload,
   };
 };
 

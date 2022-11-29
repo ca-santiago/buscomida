@@ -16,7 +16,7 @@ export enum ItemStatusEnum {
 
 export type Price = number;
 
-export interface ExtraEntryOnSection {
+export interface ExtraSectionItem {
   /**
    * Id from {@link Extra}
    */
@@ -31,20 +31,23 @@ export interface ExtraEntryOnSection {
 /**
  * A selection of many {@link Extra} under a set of given rules, as selectable options for a final product
  */
-export interface ExtraEntrySection {
+export interface ExtraSection {
   id: string;
   /** To be used as final order name */
   title: string;
   /** To be displayed as a prefix of the title on buyers view */
   // eg. {titlePrefix} {title} - Agregue un aderezo
   titlePrefix: string;
+  // By default single item sections does not show first item name
+  // so title is the unique string in section component
+  showFirstItemName: boolean;
   description: string;
   status: ItemStatus;
 
   createdAt: string;
   releaseDate: string;
 
-  extras: ExtraEntryOnSection[];
+  extras: ExtraSectionItem[];
 
   maxSelection: number;
   minSelection: number;

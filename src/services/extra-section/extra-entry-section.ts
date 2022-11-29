@@ -1,4 +1,4 @@
-import { ExtraEntrySectionDAO } from "../../mappers/types";
+import { ExtraSectionDAO } from "../../mappers/types";
 import {
   GetModelById,
   GetModelCount,
@@ -8,7 +8,7 @@ import {
 } from "../types";
 import { ExtraSectionMongoModel } from "./model";
 
-const productDaoKeys: SelectionKeys<ExtraEntrySectionDAO> = [
+const productDaoKeys: SelectionKeys<ExtraSectionDAO> = [
   "_id",
   "title",
   "titlePrefix",
@@ -22,7 +22,7 @@ const productDaoKeys: SelectionKeys<ExtraEntrySectionDAO> = [
 ];
 const extraSectionSelectionKeys = productDaoKeys.join(" ");
 
-const save: SaveModel<ExtraEntrySectionDAO> = async (e) => {
+const save: SaveModel<ExtraSectionDAO> = async (e) => {
   await ExtraSectionMongoModel.findByIdAndUpdate(
     e._id,
     { ...e },
@@ -33,7 +33,7 @@ const save: SaveModel<ExtraEntrySectionDAO> = async (e) => {
   return Promise.resolve(true);
 };
 
-const getById: GetModelById<ExtraEntrySectionDAO> = (_id) => {
+const getById: GetModelById<ExtraSectionDAO> = (_id) => {
   return new Promise((res, rej) => {
     ExtraSectionMongoModel.findOne({ _id })
       .lean()
@@ -45,7 +45,7 @@ const getById: GetModelById<ExtraEntrySectionDAO> = (_id) => {
   });
 };
 
-const getCount: GetModelCount<ExtraEntrySectionDAO> = async (offset, count) => {
+const getCount: GetModelCount<ExtraSectionDAO> = async (offset, count) => {
   const amount = await ExtraSectionMongoModel.count();
   const data = await ExtraSectionMongoModel.find()
     .skip(offset)

@@ -1,4 +1,4 @@
-import { ExtraEntrySectionDTO } from "../../../mappers/types";
+import { ExtraSectionDTO } from "../../../mappers/types";
 import { CreateDraftExtraSectionProps } from "../../models/extra-section";
 import extraSectionModel from "../../models/extra-section";
 import { saveExtraSection } from "./save-extra-section";
@@ -14,7 +14,8 @@ const createNewExtraSection = async ({
   title,
   titlePrefix,
   description,
-}: CreateExtraSectionProps): Promise<ExtraEntrySectionDTO> => {
+  showFirstItemName
+}: CreateExtraSectionProps): Promise<ExtraSectionDTO> => {
   if (maxSelection < minSelection) {
     throw new Error("max selection can't be greater than min selection");
   }
@@ -26,6 +27,7 @@ const createNewExtraSection = async ({
     minSelection,
     title,
     titlePrefix,
+    showFirstItemName,
   });
 
   return await saveExtraSection(extraSection);

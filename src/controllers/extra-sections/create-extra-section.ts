@@ -9,6 +9,7 @@ const schema = Joi.object<CreateExtraSectionProps>().keys({
   minSelection: Joi.number().min(0).max(100).required(),
   title: Joi.string().min(1).max(120).required(),
   titlePrefix: Joi.string().min(0).max(240).required(),
+  showFirstItemName: Joi.boolean().required(),
 });
 
 export const createExtraSectionRoute = async (
@@ -20,7 +21,14 @@ export const createExtraSectionRoute = async (
     return res.status(400).send(error.message);
   }
 
-  const { description, maxSelection, minSelection, title, titlePrefix } = value;
+  const {
+    description,
+    maxSelection,
+    minSelection,
+    title,
+    titlePrefix,
+    showFirstItemName,
+  } = value;
 
   const data = await extraSectionUseCases.createNew({
     title,
@@ -28,6 +36,7 @@ export const createExtraSectionRoute = async (
     maxSelection,
     minSelection,
     description,
+    showFirstItemName,
   });
   res.status(200).json({ data });
 };

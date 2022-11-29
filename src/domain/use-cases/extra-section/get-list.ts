@@ -1,9 +1,9 @@
 import extraSectionMapper from "../../../mappers/extra-entry-section";
-import { ExtraEntrySectionDTO } from "../../../mappers/types";
+import { ExtraSectionDTO } from "../../../mappers/types";
 import { extraSectionService } from "../../../services";
 
 interface GetExtraSectionListResult {
-  data: ExtraEntrySectionDTO[];
+  data: ExtraSectionDTO[];
   page: number;
   count: number;
   pageCount: number;

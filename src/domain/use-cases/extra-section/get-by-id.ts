@@ -1,10 +1,10 @@
 import extraSectionMapper from "../../../mappers/extra-entry-section";
-import { ExtraEntrySectionDTO } from "../../../mappers/types";
+import { ExtraSectionDTO } from "../../../mappers/types";
 import { extraSectionService } from "../../../services";
 
 const getExtraSectionById = async (
   id: string
-): Promise<ExtraEntrySectionDTO | null> => {
+): Promise<ExtraSectionDTO | null> => {
   const extra = await extraSectionService.getById(id);
   return extra ? extraSectionMapper.DAOToDTO(extra) : null;
 };

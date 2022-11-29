@@ -68,10 +68,11 @@ export interface ExtraEntryOnSectionDAO {
   status: string;
 }
 
-export interface ExtraEntrySectionDAO {
+export interface ExtraSectionDAO {
   _id: string;
   title: string;
   titlePrefix: string;
+  showFirstItemName: boolean;
   description: string;
   status: string;
   createdAt: string;
@@ -111,10 +112,11 @@ export interface ExtraEntryOnSectionDTO {
   status: string;
 }
 
-export interface ExtraEntrySectionDTO {
-  _id: string;
+export interface ExtraSectionDTO {
+  id: string;
   title: string;
   titlePrefix: string;
+  showFirstItemName: boolean;
   description: string;
   status: string;
   createdAt: string;

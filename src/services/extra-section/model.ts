@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { ExtraEntrySectionDAO, ProductDAO } from "../../mappers/types";
+import { ExtraSectionDAO, ProductDAO } from "../../mappers/types";
 
-const extraSectionSchema = new mongoose.Schema<ExtraEntrySectionDAO>({
+const extraSectionSchema = new mongoose.Schema<ExtraSectionDAO>({
   _id: { type: String },
   maxSelection: Number,
   minSelection: Number,
