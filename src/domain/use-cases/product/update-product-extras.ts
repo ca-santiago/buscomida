@@ -1,5 +1,5 @@
 import extraMapper from "../../../mappers/extra";
-import extraSectionMapper from "../../../mappers/extra-entry-section";
+import extraSectionMapper from "../../../mappers/extra-section";
 import productMapper from "../../../mappers/product";
 import { ProductPublicDTO } from "../../../mappers/types";
 import {

@@ -48,19 +48,7 @@ export interface ExtraDAO {
   publishedAt: string;
 }
 
-export interface ExtraEntryDAO {
-  _id: string;
-  title: string;
-  titlePrefix: string;
-  status: string;
-  extraId: string;
-  minSelection: number;
-  maxSelection: number;
-  addedPrice: number;
-  createdAt: string;
-}
-
-export interface ExtraEntryOnSectionDAO {
+export interface ExtraSectionItemDAO {
   extraId: string;
   addedPriceByUnit: number;
   minSelection: number;
@@ -77,7 +65,7 @@ export interface ExtraSectionDAO {
   status: string;
   createdAt: string;
   releaseDate: string;
-  extras: ExtraEntryOnSectionDAO[];
+  extras: ExtraSectionItemDAO[];
   maxSelection: number;
   minSelection: number;
 }
@@ -92,19 +80,7 @@ export interface ExtraDTO {
   publishedAt: string;
 }
 
-export interface ExtraEntryDTO {
-  _id: string;
-  title: string;
-  titlePrefix: string;
-  status: string;
-  extraId: string;
-  minSelection: number;
-  maxSelection: number;
-  addedPrice: number;
-  createdAt: string;
-}
-
-export interface ExtraEntryOnSectionDTO {
+export interface ExtraSectionItemDTO {
   extraId: string;
   addedPriceByUnit: number;
   minSelection: number;
@@ -121,7 +97,7 @@ export interface ExtraSectionDTO {
   status: string;
   createdAt: string;
   releaseDate: string;
-  extras: ExtraEntryOnSectionDTO[];
+  extras: ExtraSectionItemDTO[];
   maxSelection: number;
   minSelection: number;
 }

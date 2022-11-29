@@ -1,4 +1,4 @@
-import extraSectionMapper from "../../../mappers/extra-entry-section";
+import extraSectionMapper from "../../../mappers/extra-section";
 import { ExtraSectionDTO } from "../../../mappers/types";
 import { extraSectionService } from "../../../services";
 

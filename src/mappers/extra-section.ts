@@ -4,13 +4,13 @@ import {
   ExtraSectionItem,
 } from "../domain/models/types";
 import {
-  ExtraEntryOnSectionDAO,
+  ExtraSectionItemDAO,
   ExtraSectionDAO,
   ExtraSectionDTO,
 } from "./types";
 
 const mapExtraEntryOnSectionDAOtoDomain = (
-  e: ExtraEntryOnSectionDAO
+  e: ExtraSectionItemDAO
 ): ExtraSectionItem => {
   return {
     ...e,
