@@ -35,7 +35,6 @@ export interface ProductVisualPublicDTO {
   type: string;
 }
 
-
 // EXTRA
 
 export interface ExtraDAO {
@@ -102,3 +101,37 @@ export interface ExtraSectionDTO {
   minSelection: number;
 }
 
+// PRODUCT INSTANCE
+
+export interface ProductInstanceDAO {
+  _id: string;
+  productId: string;
+  checkoutDate: string;
+  sectionsDetails: ExtraSectionDetailsDAO[];
+}
+
+export interface ProductInstanceDTO {
+  id: string;
+  productId: string;
+  checkoutDate: string;
+  sectionsDetails: ExtraSectionDetailsDTO[];
+}
+
+export interface ExtraSectionDetailsDAO {
+  sectionId: string;
+  extras: ExtraDetailsDAO[];
+}
+export interface ExtraSectionDetailsDTO {
+  sectionId: string;
+  extras: ExtraDetailsDTO[];
+}
+
+export interface ExtraDetailsDAO {
+  extraId: string;
+  count: number;
+}
+
+export interface ExtraDetailsDTO {
+  extraId: string;
+  count: number;
+}
