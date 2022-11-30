@@ -123,3 +123,37 @@ export interface ExtraItem {
   maxSelection: number;
   status: ItemStatus;
 }
+
+// Cart items
+
+
+/**
+ * A PInstance should be created when confirming product configuration on UI
+ * So all instances correspond to the current cart.
+ * 
+ * PInstance creation need a set of validation/reconciliation functions
+ * To validate:
+ * - product status, can it be put to a cart? Buy?
+ * - extra cases status and content, 
+ *  - section details exists for this product and are available? 
+ * - extras and count are valid.
+ *  - selected extras exists and are valid and the selected amount is withing boundaries?
+ * 
+ * If so, PInstance follows selected product rules and can be instantiated.
+ */
+export interface ProductInstance {
+  id: string;
+  productId: string;
+  checkoutDate: string;
+  sectionsDetails: ExtraSectionDetails[];
+}
+
+export interface ExtraSectionDetails {
+  sectionId: string;
+  extras: ExtraDetails[];
+}
+
+export interface ExtraDetails {
+  extraId: string;
+  count: number;
+}
